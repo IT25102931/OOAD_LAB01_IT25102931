@@ -43,6 +43,9 @@ public class Marks {
                 case "total":
                     studentTotal(parts);
                     break;
+                case "grades":
+                    showGrades();
+                    break;
                 case "menu":
                     printMenu();
                     break;
@@ -64,6 +67,7 @@ public class Marks {
         System.out.println("  average_s [subjectID]           - average mark of a subject");
         System.out.println("  average [studentID]             - average mark of a student");
         System.out.println("  total [studentID]               - total mark of a student");
+        System.out.println("  grades                          - grade summary of all students");
         System.out.println("  menu                            - show this menu again");
         System.out.println("  exit                            - close the program");
     }
@@ -178,5 +182,35 @@ public class Marks {
             sum += marks[studentID - 1][j];
         }
         System.out.println("Total mark of student " + studentID + " = " + sum);
+    }
+
+    // returns the grade for a given mark (question 3 criteria)
+    static String getGrade(int mark) {
+        if (mark >= 90) {
+            return "Grade A";
+        } else if (mark >= 80) {
+            return "Grade B";
+        } else if (mark >= 70) {
+            return "Grade C";
+        } else if (mark >= 60) {
+            return "Grade D";
+        } else {
+            return "Fail";
+        }
+    }
+
+    // grades command - shows the grades of all students in a table
+    static void showGrades() {
+        System.out.println("\n------------------------------ Grades Summary ---------------------------------");
+        System.out.printf("%-10s %-13s %-13s %-13s\n", "Student", "Mathematics", "Chemistry", "Physics");
+        System.out.println("---------------------------------------------------------------------------------");
+        for (int i = 0; i < n; i++) {
+            System.out.printf("%-10d %-13s %-13s %-13s\n",
+                    (i + 1),
+                    getGrade(marks[i][0]),
+                    getGrade(marks[i][1]),
+                    getGrade(marks[i][2]));
+        }
+        System.out.println("---------------------------------------------------------------------------------");
     }
 }
